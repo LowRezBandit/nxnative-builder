@@ -33,7 +33,7 @@ Before building games for the first time, make sure the required tools are insta
 
 ### Settings
 
-On first launch, an **Onboarding** sheet walks you through the required paths (and you can inspect setup health anytime via **Settings > Preflight Diagnostics**. Open **Settings** (`⌘,`) to configure the paths NXNative Builder uses:
+On first launch, an **Onboarding** sheet walks you through the required paths (and you can inspect setup health anytime via **Settings > Preflight Diagnostics**). Open **Settings** (`⌘,`) to configure the paths NXNative Builder uses:
 
 - **Game Sources Folder:** Root directory containing one subfolder per game (e.g. `~/Games/_sources`).
 - **Build Output Location:**
