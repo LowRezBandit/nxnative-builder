@@ -117,7 +117,7 @@ nxnative-builder/
 
 - **User & Setup Guide:** [Docs/HOWTO.md](Docs/HOWTO.md)
 - **Contributing & Code Guidelines:** [CONTRIBUTING.md](CONTRIBUTING.md)
-- **Bug Reports & Feature Requests:** Open an issue in the **Issues** tab on GitHub using the provided templates. Please never upload `prod.keys`, game files, or unredacted personal paths.
+- **Bug Reports & Feature Requests:** Open an issue in the **[Issues](https://github.com/LowRezBandit/nxnative-builder/issues)** tab on GitHub using the provided templates. Please never upload `prod.keys`, game files, or unredacted personal paths.
 
 ---
 
