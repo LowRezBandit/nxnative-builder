@@ -4,7 +4,7 @@
 
 # NXNative Builder
 
-A native macOS app for managing, configuring, and building [nxnative](https://github.com/seedds/nxnative) games into macOS `.app`.
+A native macOS app for managing, configuring, and building [nxnative](https://github.com/seedds/nxnative) games native macOS `.app` binaries.
 
 [![Platform](https://img.shields.io/badge/macOS-14%2B-blue.svg)](https://www.apple.com/macos/)
 [![Swift](https://img.shields.io/badge/Swift-6.0-orange.svg)](https://swift.org)
