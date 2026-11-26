@@ -6,7 +6,7 @@ This guide covers setting up, configuring, and using **NXNative Builder** to bui
 
 ## 1. Settings & Initial Setup
 
-Open **Settings** (`⌘,`) to configure the paths NXNative Builder uses:
+On first launch, an **Onboarding** sheet walks you through the required paths (and you can inspect setup health anytime via **Preflight Diagnostics**). Open **Settings** (`⌘,`) to configure the paths NXNative Builder uses:
 
 - **Game Sources Folder:** Root directory containing one subfolder per game (e.g. `~/Games/_sources`).
 - **Build Output Location:**
@@ -41,6 +41,7 @@ _sources/
 - **Supported formats:** `.png`, `.jpg`, `.jpeg`, `.webp`, `.heic`, and `.icns`.
 - **Multi-game folders:** Provide per-title icons named `<name>-<TITLE_ID>.<ext>` (e.g. `icon-0100111111110000.png`, `cover-0100111111110000.jpg`) or `<TITLE_ID>.<ext>`, falling back to the shared folder icon.
 - **Automatic processing:** Any square/non-rounded or differently sized image (e.g. `2000×2000` `.jpg` or `.png`) is automatically scaled/cropped and masked to a standard `1024×1024` macOS rounded-corner PNG before passing `--icon` to NXNative. Existing `1024×1024` PNGs with transparent corners are passed through as-is.
+- **Add or replace from the UI:** Click or drag-and-drop an image directly onto the Game Card icon slot to save a normalized `1024×1024` icon (with an option to trash or keep the previous icon file).
 
 ---
 
@@ -64,6 +65,8 @@ Selecting a game in the sidebar opens its **Game Card** at the top of the detail
 - **`App:` Pill (Custom `.app` Name):**
   - Displays the target output name (`--app-name`), defaulting to the source folder name.
   - **Click the pill** to rename the output `.app` (for example, to name split multi-game entries or match a pre-existing `.app` whose folder name differs from its source folder).
+- **Per-Title `readme.md` Viewer:**
+  - When `nxnative/dm/games/<TITLE_ID>/readme.md` exists in your NXNative checkout, click the readme button on the Game Card to view its notes in a read-only sheet.
 - **Source Files List:**
   - Lists all detected `.nsp`, `.xci`, `.nsz`, and `.nup` files with `Base`, `Update`, `DLC`, or `Source` badges and public-facing version tags (e.g. `v1.0.35`, falling back to internal build numbers only when no public version is present).
 
@@ -98,7 +101,7 @@ To edit a game's `env.txt`:
 ## 6. Building, Queueing, Logs & Cleanup
 
 - **Single Build:** Click **Build** on the game card (or right-click a game in the sidebar).
-- **Batch Queue:** Check multiple games in the sidebar and click **Build Selected** (or **Build All**) to run them sequentially. You can cancel queued items, retry failed items, or clear finished items from the queue popover.
+- **Batch Queue:** Check multiple games in the sidebar and click **Build Selected** (or **Add Selected to Queue**) to run them sequentially. From the **Build Queue** pane, you can cancel queued items, retry failed items, clear finished items, click any item to inspect its log without changing sidebar selection, or resume/discard an interrupted queue on relaunch.
 - **Logs:** Switch between the selected game's log and the combined session log, filter/search log output, jump to the next error, or copy/save the log to disk.
 - **Cleanup:** Use the **`...` More Actions** menu (or right-click context menu) to **Launch .app**, **Reveal .app in Finder**, **Move Built .app to Trash**, or **Delete Build Folders** (`*_build` / `*_survey` temporary directories).
 
@@ -107,5 +110,5 @@ To edit a game's `env.txt`:
 ## 7. Developer Notes
 
 - **Project Structure:** Swift Package Manager target (`Package.swift`) with `Sources/App`, `Sources/Models`, `Sources/Services`, `Sources/Views`, and `Tests/NXNativeBuilderTests.swift`.
-- **Packaging:** `./build.sh` builds the release binary and updates the `.app` bundle.
+- **Packaging:** `./build.sh` builds the release binary and outputs `dist/NXNative Builder.app` (overridable via `APP_OUT`).
 - **Testing:** Run `swift test` (uses the Swift `Testing` framework).
