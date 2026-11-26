@@ -31,17 +31,17 @@ A native macOS app for managing, configuring, and building [NXNative](https://gi
 
 ### Library Scanning & Package Detection
 
-- **Automatic Source Scanning:** Scans your Game Sources folder for `.nsp`, `.xci`, `.nsz`, and `.nup` packages, detects **Base**, **Update**, and **DLC** contents, and displays public-facing version tags.
-- **Update Tracking:** Compares detected update packages against the installed `.app` bundle's `Info.plist` version and highlights when a newer update is available.
-- **Multi-Game Package Support:** Folders containing multiple `Application` Title IDs automatically expand into separate game entries, grouping Base, Update, and DLC files by their 13-character Title ID prefix.
+- **Automatic Source Scanning:** Scans your Game Sources folder for `.nsp`, `.xci`, `.nsz`, and `.nup` packages, detects **Base**, **Update**, and **DLC** contents, and displays version tags.
+- **Update Tracking:** Compares detected game updates against your built games and highlights when a newer update is available.
+- **Multi-Game Package Support:** Folders containing multiple Title IDs automatically expand into separate game entries, grouping Base, Update, and DLC files.
 
 ### Per-Game Configuration & Metadata
 
-- **Switch 1 / Switch 2 Platform Mode:** Choose `Auto`, `Switch 1 (Keys)`, or `Switch 2` per game (`Auto` selects `Switch 2` for `0400*` Title IDs or `.nup` sources and omits `prod.keys`).
-- **Title ID & Output Name Overrides:** View, copy, or override the 16-character hex `Title ID`, and customize the output `.app` name per entry.
-- **Built-In `env.txt` Editor:** Create, edit, and reveal per-title environment overrides (`~/Library/Application Support/nxnative/<TITLE_ID>/env.txt`) directly in the app.
-- **Game Notes (`readme.md`) Viewer:** Inspect per-title NXNative `readme.md` notes when available.
-- **Automatic Icon Normalization:** Discovers folder or per-title icons (`.png`, `.jpg`, `.jpeg`, `.webp`, `.heic`, `.icns`) and normalizes them into `1024×1024` macOS rounded-corner PNGs before building.
+- **Platform Auto-detection:** Chooses the correct build pipeline based off Title ID, automatically appending prod.keys to the build for Switch 1 titles.
+- **Title ID & Output Name Overrides:** View, copy, or override the `Title ID`, and customize the output `.app` name per entry.
+- **Built-In `env.txt` Editor:** Create, edit, and reveal per-title `nxnative` runtime overrides (`~/Library/Application Support/nxnative/<TITLE_ID>/env.txt`) directly in the app.
+- **Game Notes (`readme.md`) Viewer:** Inspect per-title nxnative `readme.md` notes when available.
+- **Automatic Icon Normalization:** Discovers folder or per-title icons (`.png`, `.jpg`, `.jpeg`, `.webp`, `.heic`, `.icns`) and processes them into `1024×1024` macOS rounded-corner PNGs before building.
 
 ### Build Queue, Logs & Cleanup
 
