@@ -18,17 +18,13 @@ A native macOS app for managing, configuring, and building [nxnative](https://gi
 
 ## Screenshots
 
-|             Main Window & Game Card              |                  Build Queue & Live Logs                  |
-| :----------------------------------------------: | :-------------------------------------------------------: |
-| ![Main Window](Docs/screenshots/main-screen.png) | ![Build Queue and Logs](Docs/screenshots/build-queue.png) |
+|             Main Window & Game Card              |                  nxnative README.md Viewer                   |
+| :----------------------------------------------: | :----------------------------------------------------------: |
+| ![Main Window](Docs/screenshots/main-screen.png) | ![nxnative readme.txt](Docs/screenshots/nxnative-readme.png) |
 
-|     Settings & Environment Diagnostics     |                  `env.txt` Editor                  |
-| :----------------------------------------: | :------------------------------------------------: |
-| ![Settings](Docs/screenshots/settings.png) | ![env.txt Editor](Docs/screenshots/env-editor.png) |
-
-|                  nxntaive readme.txt Viewer                  |
-| :----------------------------------------------------------: |
-| ![nxnative readme.txt](Docs/screenshots/nxnative-readme.png) |
+|                  Build Queue & Live Logs                  |               Game `env.txt` Editor                |     Settings & Environment Diagnostics     |
+| :-------------------------------------------------------: | :------------------------------------------------: | :----------------------------------------: |
+| ![Build Queue and Logs](Docs/screenshots/build-queue.png) | ![env.txt Editor](Docs/screenshots/env-editor.png) | ![Settings](Docs/screenshots/settings.png) |
 
 ---
 
