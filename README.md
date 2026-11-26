@@ -19,24 +19,26 @@ A native macOS SwiftUI app for managing, configuring, and building Nintendo Swit
 
 <!-- Drop your screenshots into Docs/screenshots/ with the filenames below -->
 
-| Main Window & Game Card | Build Queue & Live Logs |
-| :---: | :---: |
-| ![Main Window](Docs/screenshots/main-window.png) | ![Build Queue and Logs](Docs/screenshots/build-queue-logs.png) |
+|             Main Window & Game Card              |                    Build Queue & Live Logs                     |
+| :----------------------------------------------: | :------------------------------------------------------------: |
+| ![Main Window](Docs/screenshots/main-window.jpg) | ![Build Queue and Logs](Docs/screenshots/build-queue-logs.jpg) |
 
-| Settings & Preflight Diagnostics | `env.txt` Editor |
-| :---: | :---: |
-| ![Settings](Docs/screenshots/settings.png) | ![env.txt Editor](Docs/screenshots/env-editor.png) |
+|     Settings & Environment Diagnostics     |                    `env.txt` Editor                    |
+| :----------------------------------------: | :----------------------------------------------------: |
+| ![Settings](Docs/screenshots/settings.jpg) | ![env.txt Editor](Docs/screenshots/env-txt-editor.jpg) |
 
 ---
 
 ## Features
 
 ### Library Scanning & Package Detection
+
 - **Automatic Source Scanning:** Scans your Game Sources folder for `.nsp`, `.xci`, `.nsz`, and `.nup` packages, detects **Base**, **Update**, and **DLC** contents, and displays public-facing version tags.
 - **Update Tracking:** Compares detected update packages against the installed `.app` bundle's `Info.plist` version and highlights when a newer update is available.
 - **Multi-Game Package Support:** Folders containing multiple `Application` Title IDs automatically expand into separate game entries, grouping Base, Update, and DLC files by their 13-character Title ID prefix.
 
 ### Per-Game Configuration & Metadata
+
 - **Switch 1 / Switch 2 Platform Mode:** Choose `Auto`, `Switch 1 (Keys)`, or `Switch 2` per game (`Auto` selects `Switch 2` for `0400*` Title IDs or `.nup` sources and omits `prod.keys`).
 - **Title ID & Output Name Overrides:** View, copy, or override the 16-character hex `Title ID`, and customize the output `.app` name per entry.
 - **Built-In `env.txt` Editor:** Create, edit, and reveal per-title environment overrides (`~/Library/Application Support/nxnative/<TITLE_ID>/env.txt`) directly in the app.
@@ -44,6 +46,7 @@ A native macOS SwiftUI app for managing, configuring, and building Nintendo Swit
 - **Automatic Icon Normalization:** Discovers folder or per-title icons (`.png`, `.jpg`, `.jpeg`, `.webp`, `.heic`, `.icns`) and normalizes them into `1024×1024` macOS rounded-corner PNGs before building.
 
 ### Build Queue, Logs & Cleanup
+
 - **Sequential Batch Queue:** Build a single game or check multiple games to queue them sequentially, with support for cancelling queued items, retrying failed builds, and resuming interrupted queues.
 - **Live Searchable Logs:** Toggle between per-game and combined session logs, filter output, jump to the next error, or copy/save logs to disk.
 - **Preflight Diagnostics:** Validates your `nxnative` checkout, Python environment, Game Sources folder, and `prod.keys` before building.
