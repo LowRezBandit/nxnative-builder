@@ -1,28 +1,118 @@
+<div align="center">
+
+<img src="Resources/AppIcon.png" alt="NXNative Builder Icon" width="128" height="128" />
+
 # NXNative Builder
 
-A native macOS SwiftUI app for managing, configuring, and building Nintendo Switch games into macOS `.app` bundles using [NXNative](https://github.com/DinosaurMac/nxnative) (`scripts/build_ipa_from_nsp.py`).
+A native macOS SwiftUI app for managing, configuring, and building Nintendo Switch games into macOS `.app` bundles using [NXNative](https://github.com/DinosaurMac/nxnative).
+
+[![Platform](https://img.shields.io/badge/macOS-14%2B-blue.svg)](https://www.apple.com/macos/)
+[![Swift](https://img.shields.io/badge/Swift-6.0-orange.svg)](https://swift.org)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+[![CI](https://github.com/<your-username>/nxnative-builder/actions/workflows/ci.yml/badge.svg)](https://github.com/<your-username>/nxnative-builder/actions/workflows/ci.yml)
+
+</div>
+
+---
+
+## Screenshots
+
+<!-- Drop your screenshots into Docs/screenshots/ with the filenames below -->
+
+| Main Window & Game Card | Build Queue & Live Logs |
+| :---: | :---: |
+| ![Main Window](Docs/screenshots/main-window.png) | ![Build Queue and Logs](Docs/screenshots/build-queue-logs.png) |
+
+| Settings & Preflight Diagnostics | `env.txt` Editor |
+| :---: | :---: |
+| ![Settings](Docs/screenshots/settings.png) | ![env.txt Editor](Docs/screenshots/env-editor.png) |
+
+---
 
 ## Features
 
-- **Automatic Source Scanning:** Scans your Game Sources folder for `.nsp`, `.xci`, `.nsz`, and `.nup` packages, detects Base / Update / DLC contents, and tracks available updates against already-built `.app` bundles.
-- **Multi-Game Package Support:** Folders containing multiple `Application` Title IDs automatically expand into separate game entries with per-title package grouping and custom `.app` naming.
-- **Per-Game Controls:** Switch 1 / Switch 2 platform mode (`Auto`, `Switch 1`, `Switch 2`), editable & copyable `Title ID:`, editable `App:` output name, and a built-in `env.txt` editor.
-- **Build Queue & Live Logs:** Build single or multiple checked games sequentially with step progress tracking, searchable per-game or combined logs, and desktop notifications.
-- **Artifact & Disk Management:** Launch built `.app`s, reveal them in Finder, trash built apps, or clean temporary `*_build` / `*_survey` folders.
+### Library Scanning & Package Detection
+- **Automatic Source Scanning:** Scans your Game Sources folder for `.nsp`, `.xci`, `.nsz`, and `.nup` packages, detects **Base**, **Update**, and **DLC** contents, and displays public-facing version tags.
+- **Update Tracking:** Compares detected update packages against the installed `.app` bundle's `Info.plist` version and highlights when a newer update is available.
+- **Multi-Game Package Support:** Folders containing multiple `Application` Title IDs automatically expand into separate game entries, grouping Base, Update, and DLC files by their 13-character Title ID prefix.
 
-## Documentation
+### Per-Game Configuration & Metadata
+- **Switch 1 / Switch 2 Platform Mode:** Choose `Auto`, `Switch 1 (Keys)`, or `Switch 2` per game (`Auto` selects `Switch 2` for `0400*` Title IDs or `.nup` sources and omits `prod.keys`).
+- **Title ID & Output Name Overrides:** View, copy, or override the 16-character hex `Title ID`, and customize the output `.app` name per entry.
+- **Built-In `env.txt` Editor:** Create, edit, and reveal per-title environment overrides (`~/Library/Application Support/nxnative/<TITLE_ID>/env.txt`) directly in the app.
+- **Game Notes (`readme.md`) Viewer:** Inspect per-title NXNative `readme.md` notes when available.
+- **Automatic Icon Normalization:** Discovers folder or per-title icons (`.png`, `.jpg`, `.jpeg`, `.webp`, `.heic`, `.icns`) and normalizes them into `1024×1024` macOS rounded-corner PNGs before building.
 
-See the full user and developer guide in [Docs/HOWTO.md](Docs/HOWTO.md).
+### Build Queue, Logs & Cleanup
+- **Sequential Batch Queue:** Build a single game or check multiple games to queue them sequentially, with support for cancelling queued items, retrying failed builds, and resuming interrupted queues.
+- **Live Searchable Logs:** Toggle between per-game and combined session logs, filter output, jump to the next error, or copy/save logs to disk.
+- **Preflight Diagnostics:** Validates your `nxnative` checkout, Python environment, Game Sources folder, and `prod.keys` before building.
+- **Artifact & Disk Management:** Launch built `.app` bundles, reveal them in Finder, move built apps to Trash, or clean temporary `*_build` / `*_survey` folders.
 
-## Quick Start (Build & Test)
+---
 
-Requires macOS 14+ and Xcode / Swift 6 toolchain.
+## Prerequisites
+
+- **macOS 14.0+** (Sonoma or newer)
+- **Xcode / Swift 6 toolchain** (for building from source)
+- **Python 3** & a local **[NXNative](https://github.com/DinosaurMac/nxnative)** checkout (`scripts/build_ipa_from_nsp.py`)
+- **`prod.keys`** (user-provided, required for Switch 1 builds and `nx_extract --contents` scanning)
+
+---
+
+## Quick Start
 
 ```bash
-# Build and bundle NXNative Builder.app
-./build.sh
+# 1. Clone the repository
+git clone https://github.com/<your-username>/nxnative-builder.git
+cd nxnative-builder
 
-# Or build and run unit tests via SwiftPM
+# 2. Build the macOS .app bundle (outputs to dist/NXNative Builder.app)
+./build.sh
+```
+
+Or build and run tests with Swift Package Manager:
+
+```bash
 swift build
 swift test
 ```
+
+On first launch, open **Settings** (`⌘,`) to configure your **Game Sources Folder**, **Build Output Location** (`/Applications` or a custom folder), **NXNative Repo Folder**, and **`prod.keys`** path. See [Docs/HOWTO.md](Docs/HOWTO.md) for the complete user guide.
+
+---
+
+## Project Structure
+
+```text
+nxnative-builder/
+├── Package.swift          # SwiftPM manifest (macOS 14+, Swift 6 tools / Swift 5 mode)
+├── build.sh               # Release .app bundle builder (outputs to dist/)
+├── Sources/
+│   ├── App/               # App entry point
+│   ├── Models/            # GameEntry, BuildQueue, and package metadata models
+│   ├── Services/          # BuildManager, GameScanner, PackageHeaderReader, PreflightChecker
+│   └── Views/             # SwiftUI macOS views, sheets, and shared components
+├── Tests/                 # Swift Testing unit test suite
+├── Resources/             # Info.plist and AppIcon assets
+└── Docs/                  # User documentation (HOWTO.md) and screenshots
+```
+
+---
+
+## Documentation & Contributing
+
+- **User & Setup Guide:** [Docs/HOWTO.md](Docs/HOWTO.md)
+- **Contributing & Code Guidelines:** [CONTRIBUTING.md](CONTRIBUTING.md)
+
+---
+
+## License
+
+This project is licensed under the **GNU General Public License v3.0** — see [LICENSE](LICENSE) for details.
+
+---
+
+## Disclaimer
+
+NXNative Builder is a frontend utility for [NXNative](https://github.com/DinosaurMac/nxnative). It does **not** include any copyrighted game files, firmware, or encryption keys (`prod.keys`). You are responsible for supplying your own legally obtained backups and keys.
