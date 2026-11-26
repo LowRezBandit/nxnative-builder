@@ -56,9 +56,8 @@ _sources/
 │   ├── Diablo II Resurrected [0100726014352000][v0].nsp
 │   └── Diablo II Resurrected [0100726014352800][v2293760](1.0.35).nsp
 └── Super Macho Galaxy 1 + 2/
-    ├── icon-0100111111110000.jpg
-    ├── icon-0100222222220000.png
-    ├── icon.png
+    ├── icon-010099C022B96000.jpg
+    ├── icon-0100FD8022DAA000.png
     └── Super Macho Galaxy [010099C022B96000][v0] + Super Macho Galaxy 2 [0100FD8022DAA000][v0].xci
 ```
 

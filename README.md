@@ -2,9 +2,9 @@
 
 <img src="Resources/AppIcon.png" alt="nxnative Builder Icon" width="128" height="128" />
 
-# NXNative Builder
+## NXNative Builder
 
-A native macOS app for managing, configuring, and building [nxnative](https://github.com/seedds/nxnative) games into native macOS `.app` binaries.
+Does only one thing and does it well, building [nxnative](https://github.com/seedds/nxnative) games into native macOS `.app` binaries.
 
 [![Platform](https://img.shields.io/badge/macOS-14%2B-blue.svg)](https://www.apple.com/macos/)
 [![Swift](https://img.shields.io/badge/Swift-6.0-orange.svg)](https://swift.org)
