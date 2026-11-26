@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="Resources/AppIcon.png" alt="NXNative Builder Icon" width="128" height="128" />
+<img src="Resources/AppIcon.png" alt="nxnative Builder Icon" width="128" height="128" />
 
-# NXNative Builder
+# nxnative Builder
 
-A native macOS app for managing, configuring, and building [NXNative](https://github.com/DinosaurMac/nxnative) games into macOS `.app`.
+A native macOS app for managing, configuring, and building [nxnative](https://github.com/seedds/nxnative) games into macOS `.app`.
 
 [![Platform](https://img.shields.io/badge/macOS-14%2B-blue.svg)](https://www.apple.com/macos/)
 [![Swift](https://img.shields.io/badge/Swift-6.0-orange.svg)](https://swift.org)
@@ -56,7 +56,7 @@ A native macOS app for managing, configuring, and building [NXNative](https://gi
 
 - **macOS 14.0+** (Sonoma or newer)
 - **Xcode / Swift 6 toolchain** (for building from source)
-- **Python 3** & a local **[NXNative](https://github.com/DinosaurMac/nxnative)** checkout (`scripts/build_ipa_from_nsp.py`)
+- **Python 3** & a local **[nxnative](https://github.com/seedds/nxnative)** checkout (`scripts/build_ipa_from_nsp.py`)
 - **`prod.keys`** (user-provided, required for Switch 1 builds and `nx_extract --contents` scanning)
 
 ---
@@ -65,10 +65,10 @@ A native macOS app for managing, configuring, and building [NXNative](https://gi
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<your-username>/nxnative-builder.git
+git clone https://github.com/lowrezbandit/nxnative-builder.git
 cd nxnative-builder
 
-# 2. Build the macOS .app bundle (outputs to dist/NXNative Builder.app)
+# 2. Build the macOS .app bundle (outputs to dist/nxnative Builder.app)
 ./build.sh
 ```
 
@@ -79,7 +79,7 @@ swift build
 swift test
 ```
 
-On first launch, open **Settings** (`⌘,`) to configure your **Game Sources Folder**, **Build Output Location** (`/Applications` or a custom folder), **NXNative Repo Folder**, and **`prod.keys`** path. See [Docs/HOWTO.md](Docs/HOWTO.md) for the complete user guide.
+On first launch, open **Settings** (`⌘,`) to configure your **Game Sources Folder**, **Build Output Location** (`/Applications` or a custom folder), **nxnative Repo Folder**, and **`prod.keys`** path. See [Docs/HOWTO.md](Docs/HOWTO.md) for the complete user guide.
 
 ---
 
@@ -116,4 +116,4 @@ This project is licensed under the **GNU General Public License v3.0** — see [
 
 ## Disclaimer
 
-NXNative Builder is a frontend utility for [NXNative](https://github.com/DinosaurMac/nxnative). It does **not** include any copyrighted game files, firmware, or encryption keys (`prod.keys`). You are responsible for supplying your own legally obtained backups and keys.
+nxnative Builder is a frontend utility for [nxnative](https://github.com/DinosaurMac/nxnative). It does **not** include any copyrighted game files, firmware, or encryption keys (`prod.keys`). You are responsible for supplying your own legally obtained backups and keys.
