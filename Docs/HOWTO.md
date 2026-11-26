@@ -29,7 +29,7 @@ Before building games for the first time, make sure the required tools are insta
    ```bash
    git clone https://github.com/seedds/nxnative.git
    ```
-4. **Verify Setup:** Open **Settings** in NXNative Builder to confirm **NXNative Repository**, **Game Sources Folder**, **Python 3**, and **Xcode & Git CLI Tools** all pass.
+4. **Verify Setup:** Open **Settings > Preflight Diagnostics** in NXNative Builder to confirm **NXNative Repository**, **Game Sources Folder**, **Python 3**, and **Xcode & Git CLI Tools** all pass.
 
 ### Settings
 
