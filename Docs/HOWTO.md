@@ -29,11 +29,11 @@ Before building games for the first time, make sure the required tools are insta
    ```bash
    git clone https://github.com/seedds/nxnative.git
    ```
-4. **Verify Setup:** Open **Preflight Diagnostics** in NXNative Builder to confirm **NXNative Repository**, **Game Sources Folder**, **Python 3**, and **Xcode & Git CLI Tools** all pass.
+4. **Verify Setup:** Open **Settings** in NXNative Builder to confirm **NXNative Repository**, **Game Sources Folder**, **Python 3**, and **Xcode & Git CLI Tools** all pass.
 
 ### Settings
 
-On first launch, an **Onboarding** sheet walks you through the required paths (and you can inspect setup health anytime via **Preflight Diagnostics**). Open **Settings** (`⌘,`) to configure the paths NXNative Builder uses:
+On first launch, an **Onboarding** sheet walks you through the required paths (and you can inspect setup health anytime via **Settings > Preflight Diagnostics**). Open **Settings** (`⌘,`) to configure the paths NXNative Builder uses:
 
 - **Game Sources Folder:** Root directory containing one subfolder per game (e.g. `~/Games/_sources`).
 - **Build Output Location:**
