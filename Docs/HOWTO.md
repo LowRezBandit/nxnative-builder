@@ -1,6 +1,6 @@
 # NXNative Builder — How-To Guide
 
-This guide covers setting up, configuring, and using **NXNative Builder** to build and manage macOS `.app` bundles from Switch game packages.
+This guide covers setting up, configuring, and using **NXNative Builder** to build and manage macOS `.app` bundles from `nxnative` game packages.
 
 ---
 
@@ -28,11 +28,11 @@ _sources/
 │   ├── icon.png
 │   ├── Diablo II Resurrected [0100726014352000][v0].nsp
 │   └── Diablo II Resurrected [0100726014352800][v2293760](1.0.35).nsp
-└── Super Mario Galaxy 1 + 2/
+└── Super Macho Galaxy 1 + 2/
     ├── icon-0100111111110000.jpg
     ├── icon-0100222222220000.png
     ├── icon.png
-    └── Super Mario Galaxy [010099C022B96000][v0] + Super Mario Galaxy 2 [0100FD8022DAA000][v0].xci
+    └── Super Macho Galaxy [010099C022B96000][v0] + Super Macho Galaxy 2 [0100FD8022DAA000][v0].xci
 ```
 
 ### Icons
@@ -56,8 +56,7 @@ Selecting a game in the sidebar opens its **Game Card** at the top of the detail
   - `Size: <bytes> · Built: <date>`: Disk size and modification date of the built `.app`.
   - `NXNative Commit: <hash>` / `Build Chain: <chain>`: Toolchain metadata recorded in the built `.app`'s `Info.plist` (`DMCommit` / `DMChain`).
 - **Platform Pill (`Switch 1` / `Switch 2`):**
-  - Click to choose `Auto`, `Switch 1 (Keys)`, or `Switch 2`.
-  - `Auto` selects `Switch 2` when the Title ID starts with `0400` or `.nup` sources are present; `Switch 2` builds omit `-k prod.keys`.
+  - Autodetected when the Title ID starts with `0400` or `.nup` sources are present; `Switch 2` builds omit `-k prod.keys`.
 - **`Title ID:` Pill & Copy Button:**
   - Displays the detected (or overridden) 16-character hex Title ID (`--title-id`), or `Title ID: Not Set` if none was found.
   - **Click the pill** to set or clear a custom Title ID override.
@@ -68,17 +67,17 @@ Selecting a game in the sidebar opens its **Game Card** at the top of the detail
 - **Per-Title `readme.md` Viewer:**
   - When `nxnative/dm/games/<TITLE_ID>/readme.md` exists in your NXNative checkout, click the readme button on the Game Card to view its notes in a read-only sheet.
 - **Source Files List:**
-  - Lists all detected `.nsp`, `.xci`, `.nsz`, and `.nup` files with `Base`, `Update`, `DLC`, or `Source` badges and public-facing version tags (e.g. `v1.0.35`, falling back to internal build numbers only when no public version is present).
+  - Lists all detected `.nsp`, `.xci`, `.nsz`, and `.nup` files with `Base`, `Update`, `DLC`, or `Source` badges and version tags (e.g. `v1.0.35`, falling back to internal build numbers only when no public version is present).
 
 ---
 
 ## 4. Multi-Game Packages
 
-When a source folder contains multiple `Application` Title IDs (detected via `nx_extract --contents` or base package headers):
+When a source folder contains multiple `Title IDs` (detected via `nx_extract --contents` or base package headers):
 
 1. NXNative Builder automatically splits the folder into separate game entries (`<Folder>::<TitleID>`), each passing its own `--title-id` to `scripts/build_ipa_from_nsp.py`.
 2. Base, Update, and DLC packages are grouped to their matching game using the 13-character Title ID prefix.
-3. Use the **`App:`** pill on each entry to give each game its own `.app` name (e.g. `Super Mario Galaxy` and `Super Mario Galaxy 2`).
+3. Use the **`App:`** pill on each entry to give each game its own `.app` name (e.g. `Super Macho Galaxy` and `Super Macho Galaxy 2`).
 
 ---
 
