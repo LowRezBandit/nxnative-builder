@@ -16,6 +16,21 @@ If you downloaded a pre-built `.zip` from GitHub Releases, move **NXNative Build
   ```
 - **System Settings:** Try opening the app once, dismiss the warning, then open **System Settings → Privacy & Security** and click **Open Anyway**.
 
+### Prerequisites & Environment Setup
+
+Before building games for the first time, make sure the required tools are installed:
+
+1. **Xcode & Git:** Install **Xcode** from the Mac App Store (Command Line Tools alone are not enough—`xcodebuild` is required). Open Xcode once to accept the license (or run `sudo xcodebuild -license accept`), and confirm the active developer directory points to Xcode:
+   ```bash
+   sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+   ```
+2. **Python 3:** Install via [Homebrew](https://brew.sh) (`brew install python`) or create a `.venv` inside your `nxnative` checkout.
+3. **Clone `nxnative`:** Clone [nxnative](https://github.com/seedds/nxnative) locally and follow its README for any required tools or Python dependencies:
+   ```bash
+   git clone https://github.com/seedds/nxnative.git
+   ```
+4. **Verify Setup:** Open **Preflight Diagnostics** in NXNative Builder to confirm **NXNative Repository**, **Game Sources Folder**, **Python 3**, and **Xcode & Git CLI Tools** all pass.
+
 ### Settings
 
 On first launch, an **Onboarding** sheet walks you through the required paths (and you can inspect setup health anytime via **Preflight Diagnostics**). Open **Settings** (`⌘,`) to configure the paths NXNative Builder uses:

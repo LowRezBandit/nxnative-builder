@@ -55,9 +55,11 @@ A native macOS app for managing, configuring, and building [nxnative](https://gi
 ## Prerequisites
 
 - **macOS 14.0+** (Sonoma or newer)
-- **Xcode / Swift 6 toolchain** (for building from source)
+- **Xcode & Git** (`xcodebuild` and `git` are required at runtime to build games, as well as to compile NXNative Builder from source)
 - **Python 3** & a local **[nxnative](https://github.com/seedds/nxnative)** checkout (`scripts/build_ipa_from_nsp.py`)
 - **`prod.keys`** (user-provided, required for Switch 1 builds and `nx_extract --contents` scanning)
+
+See [Docs/HOWTO.md](Docs/HOWTO.md#1-installation--initial-setup) for first-time environment setup steps.
 
 ---
 
