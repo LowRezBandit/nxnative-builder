@@ -61,7 +61,19 @@ A native macOS app for managing, configuring, and building [nxnative](https://gi
 
 ---
 
-## Quick Start
+## Installation (Pre-built Release)
+
+1. Download the latest `.zip` from the **Releases** page, unzip it, and move **NXNative Builder.app** to `/Applications`.
+2. **Allow the unsigned app in macOS Gatekeeper:** Because the app is not notarized with an Apple Developer ID, macOS will block it on first launch. Use either method:
+   - **Terminal (recommended):**
+     ```bash
+     xattr -cr "/Applications/NXNative Builder.app"
+     ```
+   - **System Settings:** Try opening the app once, dismiss the warning, then open **System Settings → Privacy & Security** and click **Open Anyway**.
+
+---
+
+## Quick Start (Build from Source)
 
 ```bash
 # 1. Clone the repository

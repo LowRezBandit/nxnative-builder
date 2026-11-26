@@ -4,7 +4,19 @@ This guide covers setting up, configuring, and using **NXNative Builder** to bui
 
 ---
 
-## 1. Settings & Initial Setup
+## 1. Installation & Initial Setup
+
+### First Launch (Gatekeeper)
+
+If you downloaded a pre-built `.zip` from GitHub Releases, move **NXNative Builder.app** to `/Applications`. Because the app is unsigned, macOS Gatekeeper will block it on first launch until you clear the quarantine attribute or allow it in System Settings:
+
+- **Terminal (recommended):**
+  ```bash
+  xattr -cr "/Applications/NXNative Builder.app"
+  ```
+- **System Settings:** Try opening the app once, dismiss the warning, then open **System Settings → Privacy & Security** and click **Open Anyway**.
+
+### Settings
 
 On first launch, an **Onboarding** sheet walks you through the required paths (and you can inspect setup health anytime via **Preflight Diagnostics**). Open **Settings** (`⌘,`) to configure the paths NXNative Builder uses:
 
