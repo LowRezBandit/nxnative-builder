@@ -37,8 +37,8 @@ On first launch, an **Onboarding** sheet walks you through the required paths (a
 
 - **Game Sources Folder:** Root directory containing one subfolder per game (e.g. `~/Games/_sources`).
 - **Build Output Location:**
-  - **Applications (`/Applications`):** Places built `.app` bundles directly in `/Applications/<App Name>.app`.
-  - **Custom Folder:** Places built `.app` bundles in a named subfolder: `<Custom Folder>/<App Name>/<App Name>.app`.
+  - **Applications (`/Applications`):** Places built `.app` bundles directly in `/Applications/<Game Name>.app`.
+  - **Custom Folder:** Places built `.app` bundles in a named subfolder: `<Custom Folder>/<Game Name>/<Game Name>.app`.
 - **NXNative Repo Folder:** Path to your local `nxnative` checkout containing `scripts/build_ipa_from_nsp.py` (uses `.venv/bin/python3` if present, otherwise `python3` from `PATH`).
 - **Switch 1 Keys (`prod.keys`):** Path to your `prod.keys` file, used for Switch 1 builds (`-k`) and `nx_extract --contents` metadata scanning.
 - **Extra PATH:** Colon-separated paths prepended to `PATH` during builds (e.g. `/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin`).
@@ -67,7 +67,7 @@ _sources/
 - **Supported filenames (in priority order):** `icon`, `cover`, `game`, `game-icon`, `game-cover`, and legacy `1024-mac` (falling back to any supported image file in the folder).
 - **Supported formats:** `.png`, `.jpg`, `.jpeg`, `.webp`, `.heic`, and `.icns`.
 - **Multi-game folders:** Provide per-title icons named `<name>-<TITLE_ID>.<ext>` (e.g. `icon-0100111111110000.png`, `cover-0100111111110000.jpg`) or `<TITLE_ID>.<ext>`, falling back to the shared folder icon.
-- **Automatic processing:** Any square/non-rounded or differently sized image (e.g. `2000×2000` `.jpg` or `.png`) is automatically scaled/cropped and masked to a standard `1024×1024` macOS rounded-corner PNG before passing `--icon` to NXNative. Existing `1024×1024` PNGs with transparent corners are passed through as-is.
+- **Automatic processing:** Any square/non-rounded or differently sized image (e.g. `2000×2000` `.jpg` or `.png`) is automatically scaled/cropped and masked to a standard `1024×1024` macOS rounded-corner PNG before passing `--icon` to `nxnative`. Existing `1024×1024` PNGs with transparent corners are passed through as-is.
 - **Add or replace from the UI:** Click or drag-and-drop an image directly onto the Game Card icon slot to save a normalized `1024×1024` icon (with an option to trash or keep the previous icon file).
 
 ---
