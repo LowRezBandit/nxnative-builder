@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run tests
+        run: swift test
+
+      - name: Build app bundle
+        run: ./build.sh
+
+      - name: Package app bundle
+        run: |
+          mkdir -p release-assets
+          ditto -c -k --sequesterRsrc --keepParent \
+            "dist/NXNative Builder.app" \
+            "release-assets/NXNative-Builder-${GITHUB_REF_NAME}-macOS.zip"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: NXNative Builder ${{ github.ref_name }}
+          generate_release_notes: true
+          body: |
+            > **Note (Unsigned macOS App):** If macOS Gatekeeper blocks opening the app on first launch, right-click **NXNative Builder.app → Open**, or run:
+            > ```bash
+            > xattr -cr "/Applications/NXNative Builder.app"
+            > ```
+          files: |
+            release-assets/NXNative-Builder-${{ github.ref_name }}-macOS.zip
