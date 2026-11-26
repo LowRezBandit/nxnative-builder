@@ -704,3 +704,64 @@ struct IconDiscoveryTests {
         #expect(fm.fileExists(atPath: buildFolder.path) == false)
     }
 }
+
+@Suite("LogFormatter")
+struct LogFormatterTests {
+    @Test("attributedString parses ANSI SGR colors and strips escape sequences")
+    func ansiParsingAndStripping() throws {
+        let raw = "\u{1B}[1;32mSuccess\u{1B}[0m plain \u{1B}[31mFail\u{1B}[0m"
+        let result = LogFormatter.attributedString(for: raw, fontSize: 12)
+        #expect(result.attributed.string == "Success plain Fail")
+
+        let successColor = result.attributed.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? NSColor
+        let failColor = result.attributed.attribute(.foregroundColor, at: 14, effectiveRange: nil) as? NSColor
+        #expect(successColor == NSColor.systemGreen)
+        #expect(failColor == NSColor.systemRed)
+        #expect(result.endState == .default)
+    }
+
+    @Test("attributedString highlights semantic banners, warnings, and errors")
+    func semanticHighlighting() throws {
+        let raw = """
+        === Finished Demo (exit 0) in 4s ===
+        [2/5] Compiling module
+        main.cpp:10: warning: unused variable
+        main.cpp:12: error: undeclared identifier
+        """
+        let result = LogFormatter.attributedString(for: raw, fontSize: 11.5)
+        let nsString = result.attributed.string as NSString
+
+        let bannerLoc = nsString.range(of: "=== Finished").location
+        let warningLoc = nsString.range(of: "warning:").location
+        let errorLoc = nsString.range(of: "error:").location
+
+        #expect((result.attributed.attribute(.foregroundColor, at: bannerLoc, effectiveRange: nil) as? NSColor) == NSColor.systemGreen)
+        #expect((result.attributed.attribute(.foregroundColor, at: warningLoc, effectiveRange: nil) as? NSColor) == NSColor.systemOrange)
+        #expect((result.attributed.attribute(.foregroundColor, at: errorLoc, effectiveRange: nil) as? NSColor) == NSColor.systemRed)
+    }
+
+    @Test("countIssues and filterIssueLines match errors and warnings while preserving ANSI")
+    func issueFilteringAndCounting() throws {
+        let raw = """
+        [1/3] Starting
+        \u{1B}[33mmain.c: warning: implicit conversion\u{1B}[0m
+        Normal output line
+        fatal error: file not found
+        """
+        #expect(LogFormatter.countIssues(in: raw) == 2)
+        let filtered = LogFormatter.filterIssueLines(in: raw)
+        #expect(filtered.contains("warning: implicit conversion"))
+        #expect(filtered.contains("fatal error: file not found"))
+        #expect(!filtered.contains("Normal output line"))
+        #expect(LogFormatter.stripANSI(filtered).contains("\u{1B}") == false)
+    }
+
+    @Test("stripNonSGRANSI preserves color codes while removing cursor control sequences")
+    @MainActor
+    func stripNonSGR() throws {
+        let manager = BuildManager(previewGames: [])
+        let raw = "\u{1B}[2K\u{1B}[32mOK\u{1B}[0m\u{1B}]0;Title\u{07}"
+        let cleaned = manager.stripNonSGRANSI(raw)
+        #expect(cleaned == "\u{1B}[32mOK\u{1B}[0m")
+    }
+}

@@ -162,6 +162,9 @@ final class BuildManager {
     private static let ansiRegex = try? NSRegularExpression(
         pattern: #"\x1B(?:\[[0-9;?]*[ -/]*[@-~]|\][^\x07\x1B]*(?:\x07|\x1B\\))"#
     )
+    private static let nonSGRANSIRegex = try? NSRegularExpression(
+        pattern: #"\x1B(?:\[(?![0-9;]*m)[0-9;?]*[ -/]*[@-~]|\][^\x07\x1B]*(?:\x07|\x1B\\))"#
+    )
 
     private static let dateFormatter: DateFormatter = {
         let df = DateFormatter()
@@ -1496,6 +1499,12 @@ final class BuildManager {
         return regex.stringByReplacingMatches(in: text, range: range, withTemplate: "")
     }
 
+    func stripNonSGRANSI(_ text: String) -> String {
+        guard let regex = Self.nonSGRANSIRegex else { return text }
+        let range = NSRange(text.startIndex..<text.endIndex, in: text)
+        return regex.stringByReplacingMatches(in: text, range: range, withTemplate: "")
+    }
+
     private func appendBounded(_ chunk: String, to log: inout String) {
         log.append(chunk)
         if log.count > Self.maxLogCharacters {
@@ -1510,13 +1519,13 @@ final class BuildManager {
     }
 
     private func appendLog(_ text: String, for id: String) {
-        let cleanText = stripANSI(text)
-        appendBounded(cleanText, to: &globalLog)
+        let logText = stripNonSGRANSI(text)
+        appendBounded(logText, to: &globalLog)
         if let idx = games.firstIndex(where: { $0.id == id }) {
-            appendBounded(cleanText, to: &games[idx].log)
+            appendBounded(logText, to: &games[idx].log)
         }
         logRevision &+= 1
-        parseProgress(from: cleanText)
+        parseProgress(from: stripANSI(text))
     }
 
     func parseProgress(from chunk: String) {

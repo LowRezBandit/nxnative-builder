@@ -5,11 +5,18 @@ struct LogPaneView: View {
     @Bindable var manager: BuildManager
     @Binding var showCombinedLog: Bool
 
+    @AppStorage("logFontSize") private var logFontSize: Double = 11.5
+    @AppStorage("logWrapLines") private var logWrapLines = true
+
     @State private var logController = LogViewerController()
+    @State private var showIssuesOnly = false
     @State private var copiedLog = false
     @State private var copyResetTask: Task<Void, Never>?
     @State private var showClearLogsConfirm = false
     @FocusState private var isSearchFocused: Bool
+
+    private static let minFontSize: Double = 9.0
+    private static let maxFontSize: Double = 20.0
 
     private var inspectedLogGame: GameEntry? {
         let targetID = manager.inspectedLogGameID ?? manager.selectedGameID
@@ -30,6 +37,10 @@ struct LogPaneView: View {
             return game.log
         }
         return manager.globalLog
+    }
+
+    private var issueCount: Int {
+        LogFormatter.countIssues(in: displayedLog)
     }
 
     var body: some View {
@@ -58,6 +69,9 @@ struct LogPaneView: View {
                     sourceKey: showCombinedLog ? "__combined__" : (inspectedLogGame?.id ?? "__combined__"),
                     revision: manager.logRevision,
                     autoScroll: manager.autoScroll,
+                    fontSize: CGFloat(logFontSize),
+                    wrapLines: logWrapLines,
+                    filterIssuesOnly: showIssuesOnly,
                     controller: logController
                 )
 
@@ -68,6 +82,18 @@ struct LogPaneView: View {
                         Text(showCombinedLog
                              ? "Start a build to stream combined output here."
                              : "Select a game or start a build to view its log.")
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color(nsColor: .textBackgroundColor))
+                } else if showIssuesOnly && issueCount == 0 {
+                    ContentUnavailableView {
+                        Label("No Errors or Warnings", systemImage: "checkmark.circle")
+                    } description: {
+                        Text("No errors or warnings were found in the current log.")
+                    } actions: {
+                        Button("Show All Output") {
+                            showIssuesOnly = false
+                        }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color(nsColor: .textBackgroundColor))
@@ -172,6 +198,67 @@ struct LogPaneView: View {
                 .disabled(displayedLog.isEmpty)
                 .help("Jump to next error")
                 .accessibilityLabel("Jump to next error")
+
+                Toggle(isOn: $showIssuesOnly) {
+                    HStack(spacing: DesignSpacing.xs) {
+                        Image(systemName: "line.3.horizontal.decrease.circle")
+                            .frame(width: 14, height: 14)
+                        if issueCount > 0 {
+                            Text("\(issueCount)")
+                                .font(.caption2.weight(.semibold).monospacedDigit())
+                        }
+                    }
+                }
+                .toggleStyle(.button)
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+                .disabled(displayedLog.isEmpty)
+                .help(showIssuesOnly ? "Showing errors & warnings only" : "Filter to errors & warnings")
+                .accessibilityLabel("Filter errors and warnings")
+                .accessibilityValue(showIssuesOnly ? "On, \(issueCount) issues" : "Off, \(issueCount) issues")
+            }
+            .fixedSize()
+
+            Divider()
+                .frame(height: 14)
+
+            HStack(spacing: DesignSpacing.xs) {
+                Toggle(isOn: $logWrapLines) {
+                    Image(systemName: "arrow.turn.down.left")
+                        .frame(width: 14, height: 14)
+                }
+                .toggleStyle(.button)
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+                .help(logWrapLines ? "Line wrapping on" : "Line wrapping off (horizontal scroll)")
+                .accessibilityLabel("Wrap log lines")
+                .accessibilityValue(logWrapLines ? "On" : "Off")
+
+                Button {
+                    logFontSize = max(Self.minFontSize, logFontSize - 1.0)
+                } label: {
+                    Image(systemName: "textformat.size.smaller")
+                        .frame(width: 14, height: 14)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+                .disabled(logFontSize <= Self.minFontSize)
+                .keyboardShortcut("-", modifiers: .command)
+                .help("Decrease log font size (⌘-)")
+                .accessibilityLabel("Decrease log font size")
+
+                Button {
+                    logFontSize = min(Self.maxFontSize, logFontSize + 1.0)
+                } label: {
+                    Image(systemName: "textformat.size.larger")
+                        .frame(width: 14, height: 14)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+                .disabled(logFontSize >= Self.maxFontSize)
+                .keyboardShortcut("=", modifiers: .command)
+                .help("Increase log font size (⌘+)")
+                .accessibilityLabel("Increase log font size")
             }
             .fixedSize()
 
@@ -181,7 +268,7 @@ struct LogPaneView: View {
             HStack(spacing: DesignSpacing.xs) {
                 Button {
                     NSPasteboard.general.clearContents()
-                    NSPasteboard.general.setString(displayedLog, forType: .string)
+                    NSPasteboard.general.setString(LogFormatter.stripANSI(displayedLog), forType: .string)
                     copiedLog = true
                     copyResetTask?.cancel()
                     copyResetTask = Task { @MainActor in
@@ -202,7 +289,7 @@ struct LogPaneView: View {
 
                 Button {
                     let baseName = showCombinedLog ? "NXNative-Combined" : (inspectedLogGame?.name ?? "NXNative")
-                    logController.saveLog(displayedLog, defaultName: baseName)
+                    logController.saveLog(LogFormatter.stripANSI(displayedLog), defaultName: baseName)
                 } label: {
                     Image(systemName: "square.and.arrow.down")
                         .frame(width: 14, height: 14)

@@ -10,6 +10,7 @@ A native macOS app for managing, configuring, and building [nxnative](https://gi
 [![Swift](https://img.shields.io/badge/Swift-6.0-orange.svg)](https://swift.org)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![CI](https://github.com/LowRezBandit/nxnative-builder/actions/workflows/ci.yml/badge.svg)](https://github.com/LowRezBandit/nxnative-builder/actions/workflows/ci.yml)
+[![GitHub Issues](https://img.shields.io/github/issues/lowrezbandit/nxnative-builder)](https://github.com/LowRezBandit/nxnative-builder/issues)
 
 </div>
 
@@ -17,13 +18,17 @@ A native macOS app for managing, configuring, and building [nxnative](https://gi
 
 ## Screenshots
 
-|             Main Window & Game Card              |                    Build Queue & Live Logs                    |
-| :----------------------------------------------: | :-----------------------------------------------------------: |
-| ![Main Window](Docs/screenshots/main-window.jpg) | ![Build Queue and Logs](Docs/screenshots/build-queue-log.jpg) |
+|             Main Window & Game Card              |                  Build Queue & Live Logs                  |
+| :----------------------------------------------: | :-------------------------------------------------------: |
+| ![Main Window](Docs/screenshots/main-screen.png) | ![Build Queue and Logs](Docs/screenshots/build-queue.png) |
 
-|     Settings & Environment Diagnostics     |                    `env.txt` Editor                    |
-| :----------------------------------------: | :----------------------------------------------------: |
-| ![Settings](Docs/screenshots/settings.jpg) | ![env.txt Editor](Docs/screenshots/env-txt-editor.jpg) |
+|     Settings & Environment Diagnostics     |                  `env.txt` Editor                  |
+| :----------------------------------------: | :------------------------------------------------: |
+| ![Settings](Docs/screenshots/settings.png) | ![env.txt Editor](Docs/screenshots/env-editor.png) |
+
+|                  nxntaive readme.txt Viewer                  |
+| :----------------------------------------------------------: |
+| ![nxnative readme.txt](Docs/screenshots/nxnative-readme.png) |
 
 ---
 
