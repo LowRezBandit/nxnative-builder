@@ -1,3 +1,8 @@
+## Reporting Issues
+
+- Use the **Bug Report** or **Feature Request** templates in the **Issues** tab on GitHub.
+- Include your macOS version, NXNative Builder version, and a sanitized Build Log snippet (remove any personal file paths, and never attach `prod.keys` or game files).
+
 ## Build & Test
 
 - **Platform:** macOS 14+ (`Package.swift` uses `swift-tools-version: 6.0` with `.swiftLanguageMode(.v5)`).

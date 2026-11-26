@@ -1,0 +1,73 @@
+name: Bug Report
+description: Report a bug or unexpected behavior in NXNative Builder
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please fill out the details below.
+        **Never attach `prod.keys`, copyrighted game files, or unredacted personal paths.**
+
+  - type: input
+    id: app-version
+    attributes:
+      label: NXNative Builder Version
+      description: e.g. v1.0.0 or commit hash
+      placeholder: v1.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: macos-version
+    attributes:
+      label: macOS Version & Architecture
+      description: e.g. macOS 15.3 (Apple Silicon M2)
+      placeholder: macOS 15.x (Apple Silicon)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform-mode
+    attributes:
+      label: Platform Mode
+      options:
+        - Auto
+        - Switch 1 (Keys)
+        - Switch 2
+        - Not applicable (UI / scanning issue)
+    validations:
+      required: true
+
+  - type: input
+    id: nxnative-version
+    attributes:
+      label: NXNative Repo Version / Commit (if applicable)
+      placeholder: e.g. main @ abc1234
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Clear steps to reproduce the issue
+      placeholder: |
+        1. Open Settings and configure...
+        2. Select game...
+        3. Click Build...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-actual
+    attributes:
+      label: Expected vs. Actual Behavior
+      description: What did you expect to happen, and what happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized Build Log (if applicable)
+      description: Use Copy or Save in the Build Log pane, and remove any personal paths before pasting.
+      render: text

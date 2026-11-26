@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Setup & Usage Guide
+    url: https://github.com/LowRezBandit/nxnative-builder/blob/main/Docs/HOWTO.md
+    about: Check Docs/HOWTO.md for setup, icon naming, env.txt, and build queue instructions before opening an issue.
