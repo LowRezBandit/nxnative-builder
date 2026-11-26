@@ -30,9 +30,8 @@ body:
   - type: dropdown
     id: platform-mode
     attributes:
-      label: Platform Mode
+      label: Platform
       options:
-        - Auto
         - Switch 1 (Keys)
         - Switch 2
         - Not applicable (UI / scanning issue)
