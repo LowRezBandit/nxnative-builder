@@ -2,7 +2,7 @@
 
 <img src="Resources/AppIcon.png" alt="nxnative Builder Icon" width="128" height="128" />
 
-# nxnative Builder
+# NXNative Builder
 
 A native macOS app for managing, configuring, and building [nxnative](https://github.com/seedds/nxnative) games into macOS `.app`.
 
