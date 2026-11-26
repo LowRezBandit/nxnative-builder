@@ -4,12 +4,12 @@
 
 # NXNative Builder
 
-A native macOS SwiftUI app for managing, configuring, and building Nintendo Switch games into macOS `.app` bundles using [NXNative](https://github.com/DinosaurMac/nxnative).
+A native macOS app for managing, configuring, and building [NXNative](https://github.com/DinosaurMac/nxnative) games into macOS `.app`.
 
 [![Platform](https://img.shields.io/badge/macOS-14%2B-blue.svg)](https://www.apple.com/macos/)
 [![Swift](https://img.shields.io/badge/Swift-6.0-orange.svg)](https://swift.org)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
-[![CI](https://github.com/<your-username>/nxnative-builder/actions/workflows/ci.yml/badge.svg)](https://github.com/<your-username>/nxnative-builder/actions/workflows/ci.yml)
+[![CI](https://github.com/LowRezBandit/nxnative-builder/actions/workflows/ci.yml/badge.svg)](https://github.com/LowRezBandit/nxnative-builder/actions/workflows/ci.yml)
 
 </div>
 
@@ -17,11 +17,9 @@ A native macOS SwiftUI app for managing, configuring, and building Nintendo Swit
 
 ## Screenshots
 
-<!-- Drop your screenshots into Docs/screenshots/ with the filenames below -->
-
-|             Main Window & Game Card              |                    Build Queue & Live Logs                     |
-| :----------------------------------------------: | :------------------------------------------------------------: |
-| ![Main Window](Docs/screenshots/main-window.jpg) | ![Build Queue and Logs](Docs/screenshots/build-queue-logs.jpg) |
+|             Main Window & Game Card              |                    Build Queue & Live Logs                    |
+| :----------------------------------------------: | :-----------------------------------------------------------: |
+| ![Main Window](Docs/screenshots/main-window.jpg) | ![Build Queue and Logs](Docs/screenshots/build-queue-log.jpg) |
 
 |     Settings & Environment Diagnostics     |                    `env.txt` Editor                    |
 | :----------------------------------------: | :----------------------------------------------------: |
