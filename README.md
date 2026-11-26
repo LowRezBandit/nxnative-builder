@@ -116,4 +116,4 @@ This project is licensed under the **GNU General Public License v3.0** — see [
 
 ## Disclaimer
 
-NXNative Builder is a frontend utility for **[nxnative](https://github.com/seedds/nxnative)**. It does **not** include any copyrighted game files, firmware, or encryption keys (`prod.keys`). You are responsible for supplying your own legally obtained backups and keys.
+NXNative Builder is a frontend utility for **[nxnative](https://github.com/seedds/nxnative)**. It does **not** include any copyrighted game files, firmware, or encryption keys (`prod.keys`). You are responsible for supplying your own legally owned game backups and keys.
